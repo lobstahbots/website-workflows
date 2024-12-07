@@ -13,6 +13,9 @@ const revalidateWebsiteShortcut: Trigger<
     channel_id: {
       value: TriggerContextData.Shortcut.channel_id,
     },
+    user_id: {
+      value: TriggerContextData.Shortcut.user_id,
+    },
   },
 };
 

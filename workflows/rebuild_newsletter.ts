@@ -10,8 +10,11 @@ const RebuildNewsletterWorkflow = DefineWorkflow({
       channel_id: {
         type: Schema.slack.types.channel_id,
       },
+      user_id: {
+        type: Schema.slack.types.user_id,
+      },
     },
-    required: ["channel_id"],
+    required: ["channel_id", "user_id"],
   },
 });
 
@@ -19,7 +22,8 @@ RebuildNewsletterWorkflow.addStep(RevalidateWebsiteDefinition, {});
 
 RebuildNewsletterWorkflow.addStep(Schema.slack.functions.SendMessage, {
   channel_id: RebuildNewsletterWorkflow.inputs.channel_id,
-  message: "Started newsletter rebuild",
+  message:
+    `<@${RebuildNewsletterWorkflow.inputs.user_id}> started a newsletter rebuild`,
 });
 
 export default RebuildNewsletterWorkflow;

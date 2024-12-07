@@ -10,12 +10,24 @@ const RevalidateWebsiteWorkflow = DefineWorkflow({
       channel_id: {
         type: Schema.slack.types.channel_id,
       },
+      user_id: {
+        type: Schema.slack.types.user_id,
+      },
     },
-    required: ["channel_id"],
+    required: ["channel_id", "user_id"],
   },
 });
 
-const revalidateWebsiteStep = RevalidateWebsiteWorkflow.addStep(RevalidateWebsiteDefinition, {});
+RevalidateWebsiteWorkflow.addStep(Schema.slack.functions.SendMessage, {
+  channel_id: RevalidateWebsiteWorkflow.inputs.channel_id,
+  message:
+    `<@${RevalidateWebsiteWorkflow.inputs.user_id}> started a website revalidation`,
+});
+
+const revalidateWebsiteStep = RevalidateWebsiteWorkflow.addStep(
+  RevalidateWebsiteDefinition,
+  {},
+);
 
 RevalidateWebsiteWorkflow.addStep(Schema.slack.functions.SendMessage, {
   channel_id: RevalidateWebsiteWorkflow.inputs.channel_id,
