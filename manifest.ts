@@ -1,7 +1,6 @@
 import { Manifest } from "deno-slack-sdk/mod.ts";
 import RebuildNewsletterDefinition from "./functions/rebuild_newsletter/definition.ts";
 import RebuildNewsletterWorkflow from "./workflows/rebuild_newsletter.ts";
-import AddToDoWorkflow from "./workflows/add_todo.ts";
 import RevalidateWebsiteDefinition from "./functions/revalidate_website/definition.ts";
 import RevalidateWebsiteWorkflow from "./workflows/revalidate_website.ts";
 
@@ -13,7 +12,6 @@ export default Manifest({
   workflows: [
     RebuildNewsletterWorkflow,
     RevalidateWebsiteWorkflow,
-    AddToDoWorkflow,
   ],
   outgoingDomains: ["api.github.com", "lobstahbots.com"],
   botScopes: [
