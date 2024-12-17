@@ -13,9 +13,13 @@ const LeaderboardUpdateDefinition = DefineFunction({
       },
       timestamp: {
         type: Schema.types.number,
+      },
+      message_content: {
+        type: Schema.types.string,
+        description: "The content of the message",
       }
     },
-    required: ["user_id", "timestamp"]
+    required: ["user_id", "timestamp", "message_content"]
   }
 });
 

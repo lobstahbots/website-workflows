@@ -1,6 +1,10 @@
 import { Trigger } from "deno-slack-sdk/types.ts";
 import LeaderboardUpdateDefinition from "../functions/leaderboard_update/definition.ts";
-import { TriggerContextData, TriggerEventTypes, TriggerTypes } from "deno-slack-api/mod.ts";
+import {
+  TriggerContextData,
+  TriggerEventTypes,
+  TriggerTypes,
+} from "deno-slack-api/mod.ts";
 
 const LeaderboardUpdateTrigger: Trigger<
   typeof LeaderboardUpdateDefinition.definition
@@ -15,13 +19,9 @@ const LeaderboardUpdateTrigger: Trigger<
     filter: {
       version: 1,
       root: {
-        operator: "OR",
-        inputs: [
-          { statement: "{{data.text}} == '246'"},
-          { statement: "{{data.text}} CONTAINS '2:46'"},
-        ]
-      }
-    }
+        statement: "{{data.text}} == {{data.text}}",
+      },
+    },
   },
   inputs: {
     user_id: {
@@ -30,7 +30,10 @@ const LeaderboardUpdateTrigger: Trigger<
     timestamp: {
       value: TriggerContextData.Event.MessagePosted.message_ts,
     },
-  }
+    message_content: {
+      value: TriggerContextData.Event.MessagePosted.text,
+    },
+  },
 };
 
 export default LeaderboardUpdateTrigger;

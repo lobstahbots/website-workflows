@@ -6,9 +6,10 @@ export default SlackFunction(
   LeaderboardUpdateDefinition,
   async ({ client, inputs }) => {
     const time = new Date(inputs.timestamp * 1000);
+    const text = inputs.message_content;
     if (
       time.toLocaleTimeString("en-US", { timeZone: "America/New_York" })
-        .startsWith("2:46")
+        .startsWith("2:46") && (text.includes("2:46") || text.includes("246"))
     ) {
       const getResponse = await client.apps.datastore.get<
         typeof LeaderboardDatastore.definition
