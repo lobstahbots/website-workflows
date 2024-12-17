@@ -2,13 +2,22 @@ import { DefineDatastore, Schema } from "deno-slack-sdk/mod.ts";
 
 export default DefineDatastore({
   name: "leaderboard",
-  primary_key: "user_id",
+  primary_key: "id",
   attributes: {
+    id: {
+      type: Schema.types.string,
+    },
     user_id: {
       type: Schema.slack.types.user_id,
     },
-    message_count: {
-      type: Schema.types.integer,
+    date: {
+      type: Schema.slack.types.date,
+    },
+    timestamp: {
+      type: Schema.types.number,
+    },
+    message_content: {
+      type: Schema.types.string,
     },
   },
 });
