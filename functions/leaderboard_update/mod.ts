@@ -5,12 +5,11 @@ import LeaderboardDatastore from "../../datastores/leaderboard.ts";
 export default SlackFunction(
   LeaderboardUpdateDefinition,
   async ({ client, inputs }) => {
-    const time = new Temporal.Instant(
-      BigInt(inputs.timestamp.toFixed()) * 1000000000n,
-    ).toZonedDateTimeISO("America/New_York");
+    const time = new Date(inputs.timestamp * 1000);
     const text = inputs.message_content;
     if (
-      time.hour % 12 === 2 && time.minute === 46 && (text.includes("2:46") || text.includes("246"))
+      time.toLocaleTimeString("en-US", { timeZone: "America/New_York" })
+        .startsWith("2:46") && (text.includes("2:46") || text.includes("246"))
     ) {
       const putResponse = await client.apps.datastore.put<
         typeof LeaderboardDatastore.definition
@@ -21,7 +20,7 @@ export default SlackFunction(
           user_id: inputs.user_id,
           message_content: inputs.message_content,
           timestamp: inputs.timestamp,
-          date: time.toPlainDate().toString(),
+          date: time.toISOString().split("T")[0],
         },
       });
       if (!putResponse.ok) {
