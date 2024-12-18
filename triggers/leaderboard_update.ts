@@ -5,6 +5,7 @@ import {
   TriggerEventTypes,
   TriggerTypes,
 } from "deno-slack-api/mod.ts";
+import { CHANNEL_ID } from "../constants.ts";
 
 const LeaderboardUpdateTrigger: Trigger<
   typeof LeaderboardUpdateDefinition.definition
@@ -15,7 +16,7 @@ const LeaderboardUpdateTrigger: Trigger<
   workflow: "#/workflows/leaderboard_update_workflow",
   event: {
     event_type: TriggerEventTypes.MessagePosted,
-    channel_ids: ["C046CFN4AJ0"],
+    channel_ids: [CHANNEL_ID],
     filter: {
       version: 1,
       root: {

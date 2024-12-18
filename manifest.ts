@@ -6,6 +6,9 @@ import RevalidateWebsiteWorkflow from "./workflows/revalidate_website.ts";
 import LeaderboardUpdateDefinition from "./functions/leaderboard_update/definition.ts";
 import LeaderboardUpdateWorkflow from "./workflows/leaderboard_update.ts";
 import LeaderboardDatastore from "./datastores/leaderboard.ts";
+import ClearLeaderboardDefinition from "./functions/clear_leaderboard/definition.ts";
+import RegenerateLeaderboardDefinition from "./functions/regenerate_leaderboard/definition.ts";
+import RegenerateLeaderboardWorkflow from "./workflows/regenerate_leaderboard.ts";
 
 export default Manifest({
   name: "Lobstah Bots",
@@ -18,11 +21,14 @@ export default Manifest({
     RebuildNewsletterDefinition,
     RevalidateWebsiteDefinition,
     LeaderboardUpdateDefinition,
+    ClearLeaderboardDefinition,
+    RegenerateLeaderboardDefinition,
   ],
   workflows: [
     RebuildNewsletterWorkflow,
     RevalidateWebsiteWorkflow,
     LeaderboardUpdateWorkflow,
+    RegenerateLeaderboardWorkflow,
   ],
   outgoingDomains: ["api.github.com", "lobstahbots.com"],
   botScopes: [

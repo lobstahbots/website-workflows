@@ -1,6 +1,7 @@
 import { SlackFunction } from "deno-slack-sdk/mod.ts";
 import LeaderboardUpdateDefinition from "./definition.ts";
 import LeaderboardDatastore from "../../datastores/leaderboard.ts";
+import { CHANNEL_ID } from "../../constants.ts";
 
 export default SlackFunction(
   LeaderboardUpdateDefinition,
@@ -21,7 +22,7 @@ export default SlackFunction(
         item: {
           id: crypto.randomUUID(),
           user_id: inputs.user_id,
-          message_content: inputs.message_content,
+          message_content: text,
           timestamp: inputs.timestamp,
           date: time.toISOString().split("T")[0],
           pm: localeTimeString.endsWith("PM"),
@@ -32,7 +33,7 @@ export default SlackFunction(
       }
       if (localeTimeString.endsWith("AM")) {
         client.reactions.add({
-          channel: "C046CFN4AJ0",
+          channel: CHANNEL_ID,
           timestamp: inputs.timestamp,
           name: "bed",
         });
