@@ -19,5 +19,8 @@ export default DefineDatastore({
     message_content: {
       type: Schema.types.string,
     },
+    pm: {
+      type: Schema.types.boolean,
+    },
   },
 });
