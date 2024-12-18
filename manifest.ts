@@ -34,5 +34,6 @@ export default Manifest({
     "datastore:read",
     "datastore:write",
     "channels:history",
+    "reactions:write",
   ],
 });

@@ -30,6 +30,13 @@ export default SlackFunction(
       if (!putResponse.ok) {
         return { error: putResponse.error ?? "uknown put error" };
       }
+      if (localeTimeString.endsWith("AM")) {
+        client.reactions.add({
+          channel: "C046CFN4AJ0",
+          timestamp: inputs.timestamp,
+          name: "bed",
+        });
+      }
     }
     return { outputs: {} };
   },
