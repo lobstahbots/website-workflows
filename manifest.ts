@@ -9,6 +9,10 @@ import LeaderboardDatastore from "./datastores/leaderboard.ts";
 import ClearLeaderboardDefinition from "./functions/clear_leaderboard/definition.ts";
 import RegenerateLeaderboardDefinition from "./functions/regenerate_leaderboard/definition.ts";
 import RegenerateLeaderboardWorkflow from "./workflows/regenerate_leaderboard.ts";
+import LeaderboardCountsDefinition, {
+  UserCountType,
+} from "./functions/leaderboard_counts/definition.ts";
+import LeaderboardCountsWorkflow from "./workflows/leaderboard_counts.ts";
 
 export default Manifest({
   name: "Lobstah Bots",
@@ -23,12 +27,17 @@ export default Manifest({
     LeaderboardUpdateDefinition,
     ClearLeaderboardDefinition,
     RegenerateLeaderboardDefinition,
+    LeaderboardCountsDefinition,
   ],
   workflows: [
     RebuildNewsletterWorkflow,
     RevalidateWebsiteWorkflow,
     LeaderboardUpdateWorkflow,
     RegenerateLeaderboardWorkflow,
+    LeaderboardCountsWorkflow,
+  ],
+  types: [
+    UserCountType,
   ],
   outgoingDomains: ["api.github.com", "lobstahbots.com"],
   botScopes: [
@@ -41,5 +50,6 @@ export default Manifest({
     "datastore:write",
     "channels:history",
     "reactions:write",
+    "channels:read",
   ],
 });

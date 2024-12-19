@@ -21,7 +21,7 @@ export default SlackFunction(
       console.error(err);
       return {
         error:
-          `An error was encountered during calling the action: \`${err.message}\``,
+          `An error was encountered during calling the action: \`${(err as Error).message}\``,
       };
     }
   },
